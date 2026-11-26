@@ -1,3 +1,2 @@
 ragfoundry[pdf,docx,excel,web,huggingface,chroma,groq,ollama]==0.2.0
 streamlit>=1.40
-python-dotenv>=1.0

@@ -4,14 +4,21 @@ import os
 from pathlib import Path
 
 import streamlit as st
-from dotenv import load_dotenv
 from ragfoundry import RAGPipeline
 
-load_dotenv()
 UPLOADS = Path("uploads")
 SUPPORTED = ["pdf", "docx", "txt", "md", "csv", "xlsx", "xls"]
 
 st.set_page_config(page_title="Document Chat", page_icon="📄", layout="wide")
+
+# Settings come from Streamlit secrets: .streamlit/secrets.toml locally, the Secrets box on
+# Streamlit Cloud. Copied into the environment because rag.yaml and ragfoundry read them there.
+try:
+    for name, value in st.secrets.items():
+        if isinstance(value, (str, int, float)):  # skip [sections]
+            os.environ.setdefault(name, str(value))
+except FileNotFoundError:  # no secrets file: fall back to the sidebar key field
+    pass
 
 
 @st.cache_resource(show_spinner="Loading models...")

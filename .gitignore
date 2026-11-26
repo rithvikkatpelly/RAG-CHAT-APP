@@ -1,6 +1,6 @@
 .venv/
 __pycache__/
-.env
+.streamlit/secrets.toml
 storage/
 uploads/
 .DS_Store
